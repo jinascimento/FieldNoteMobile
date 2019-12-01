@@ -8,14 +8,12 @@
 
 import React from 'react';
 import 'react-native-gesture-handler';
-import { Text, View } from 'react-native';
 
 import './config/ReactotronConfig';
+import createRouter from './routes';
 
 export default function App() {
-  return (
-    <View>
-      <Text>Index</Text>
-    </View>
-  );
+  const Routes = createRouter(false);
+
+  return <Routes />;
 }

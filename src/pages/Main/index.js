@@ -9,4 +9,8 @@ const Main = () => {
   );
 };
 
+Main.navigationOptions = {
+  title: 'Inicial',
+};
+
 export default Main;
