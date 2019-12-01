@@ -1,13 +1,37 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import {
+  Container,
+  Form,
+  FormInput,
+  SubmitButton,
+  SubmitButtonText,
+} from './styles';
 
 const Signin = () => {
   return (
-    <View>
-      <Text>Signin</Text>
-    </View>
+    <Container>
+      <Form>
+        <FormInput
+          icon="mail-outline"
+          keyboardType="email-address"
+          autoCorrect={false}
+          autoCapitalize="none"
+          placeholder="Digite seu email"
+          returnKeyType="next"
+        />
+        <FormInput
+          icon="lock-outline"
+          secureTextEntry
+          placeholder="Digite sua senha"
+          returnKeyType="send"
+        />
+
+        <SubmitButton>
+          <SubmitButtonText>Acessar</SubmitButtonText>
+        </SubmitButton>
+      </Form>
+    </Container>
   );
 };
-
 
 export default Signin;
