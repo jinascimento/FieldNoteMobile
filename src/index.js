@@ -5,15 +5,14 @@ import 'react-native-gesture-handler';
 
 import './config/ReactotronConfig';
 import { store, persistor } from './store';
-import createRouter from './routes';
+import App from './App';
 
-export default function App() {
-  const Routes = createRouter(false);
+export default function Index() {
 
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Routes />
+        <App />
       </PersistGate>
     </Provider>
   );
