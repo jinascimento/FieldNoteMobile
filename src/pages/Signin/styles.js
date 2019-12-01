@@ -30,7 +30,7 @@ export const FormInput = styled.TextInput`
 
 export const SubmitButton = styled(RectButton)`
   height: 46px;
-  background: rgba(1, 168, 107);
+  background: rgba(24,141,64,0.98);
   border-radius: 20px;
   margin-top: 15px;
   align-items: center;
