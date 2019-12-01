@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { signInRequest } from '../../store/modules/auth/actions';
-import api from '../../services/api';
 
 import {
   Container,
@@ -12,7 +10,7 @@ import {
   SubmitButtonText,
 } from './styles';
 
-export default function Signin({ nagivation }) {
+export default function Signin() {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState();
