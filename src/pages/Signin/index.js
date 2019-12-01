@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { signInRequest } from '../../store/modules/auth/actions';
 import api from '../../services/api';
 
 import {
@@ -10,66 +12,42 @@ import {
   SubmitButtonText,
 } from './styles';
 
-export default class Signin extends Component {
-  state = {
-    email: '',
-    password: '',
-  };
+export default function Signin({ nagivation }) {
+  const dispatch = useDispatch();
 
-  static propTypes = {
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func,
-    }).isRequired,
-  };
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-  handleNavigate = () => {
-    const { navigation } = this.props;
-    navigation.navigate('Main');
-  };
-
-  handleAuthenticate = async () => {
-    const { password, email } = this.state;
-
-    try {
-      await api.post('api/v1/sessions', {
-        email,
-        password,
-      });
-
-      this.handleNavigate();
-    } catch (e) {
-      console.tron.log('error');
-    }
-  };
-
-  render() {
-    const { email, password } = this.state;
-
-    return (
-      <Container>
-        <Form>
-          <FormInput
-            icon="mail-outline"
-            keyboardType="email-address"
-            autoCorrect={false}
-            autoCapitalize="none"
-            placeholder="Digite seu email"
-            returnKeyType="next"
-            onChangeText={text => this.setState({ email: text })}
-          />
-          <FormInput
-            icon="lock-outline"
-            secureTextEntry
-            placeholder="Digite sua senha"
-            returnKeyType="send"
-            onChangeText={text => this.setState({ password: text })}
-          />
-
-          <SubmitButton onPress={this.handleAuthenticate}>
-            <SubmitButtonText>Acessar</SubmitButtonText>
-          </SubmitButton>
-        </Form>
-      </Container>
-    );
+  function handleAuthenticate() {
+    dispatch(signInRequest(email, password));
   }
+
+  return (
+    <Container>
+      <Form>
+        <FormInput
+          icon="mail-outline"
+          keyboardType="email-address"
+          autoCorrect={false}
+          autoCapitalize="none"
+          placeholder="Digite seu email"
+          returnKeyType="next"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <FormInput
+          icon="lock-outline"
+          secureTextEntry
+          placeholder="Digite sua senha"
+          returnKeyType="send"
+          value={password}
+          onChangeText={setPassword}
+        />
+
+        <SubmitButton onPress={handleAuthenticate}>
+          <SubmitButtonText>Acessar</SubmitButtonText>
+        </SubmitButton>
+      </Form>
+    </Container>
+  );
 }
