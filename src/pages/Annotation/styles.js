@@ -22,13 +22,15 @@ export const Title = styled.Text`
 export const Form = styled.View`
   align-self: stretch;
   margin-top: 100px;
+  justify-content: space-around;
+  flex: 1;
 `;
 
 export const inputTextArea = StyleSheet.create({
   textInputStyle: {
-    marginBottom: 30,
     borderColor: '#ede8f7',
     color: '#2f76b4',
+    flex: 1,
   },
 });
 
@@ -37,6 +39,7 @@ export const SubmitButton = styled(RectButton)`
   background: rgba(24, 141, 64, 0.98);
   border-radius: 20px;
   margin-top: 100px;
+  margin-bottom: 40px;
   align-items: center;
   justify-content: center;
 `;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput } from 'react-native';
+import { Alert, TextInput } from 'react-native';
 import {
   Container,
   Form,
@@ -16,13 +16,19 @@ export default function Annotation({ navigation }) {
   const [description, setDescription] = useState([]);
 
   async function handleAddAnnotation() {
-    const response = await api.post('/api/v1/annotations', {
-      latitude: -21.224535,
-      longitute: -43.771443,
-      description,
-    });
-
-    navigation.navigate('Main');
+    try {
+      await api.post('/api/v1/annotations', {
+        latitude: -21.224535,
+        longitude: -43.771443,
+        description,
+      });
+      navigation.navigate('Main');
+    } catch (e) {
+      Alert.alert(
+        'Erro',
+        'Houve um erro ao salvar a anotação, verifique se foi preenchido corretamente!'
+      );
+    }
   }
 
   return (

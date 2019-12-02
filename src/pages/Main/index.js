@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import { withNavigationFocus } from 'react-navigation';
 import { Container, Title } from './styles';
 
 import api from '../../services/api';
 
-function Main() {
+function Main({ isFocused }) {
   const [annotations, setAnnotations] = useState([]);
 
-  useEffect(() => {
-    async function loadAnnotations() {
-      const response = await api.get('/api/v1/annotations');
+  async function loadAnnotations() {
+    const response = await api.get('/api/v1/annotations');
+    console.tron.log('load')
+    setAnnotations(response.data);
+  }
 
-      setAnnotations(response.data);
+  useEffect(() => {
+    if (isFocused) {
+      loadAnnotations();
     }
-    loadAnnotations();
-  }, []);
+  }, [isFocused]);
 
   return (
     <Container>
@@ -26,4 +30,4 @@ Main.navigationOptions = {
   title: 'Anotações',
 };
 
-export default Main;
+export default withNavigationFocus(Main);
