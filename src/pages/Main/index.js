@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Container, Title } from './styles';
 
 import api from '../../services/api';
 
@@ -16,18 +16,14 @@ function Main() {
   }, []);
 
   return (
-    <View>
-      <Text>
-        {annotations.forEach(a => {
-          console.tron.log(a);
-        })}
-      </Text>
-    </View>
+    <Container>
+      <Title>Anotações de Campo</Title>
+    </Container>
   );
 }
 
 Main.navigationOptions = {
-  title: 'Anotações de Campo',
+  title: 'Anotações',
 };
 
 export default Main;

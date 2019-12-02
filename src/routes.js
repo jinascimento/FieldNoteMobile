@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Main from './pages/Main';
 import Signin from './pages/Signin';
+import Annotation from './pages/Annotation';
 
 export default (signedIn = false) =>
   createAppContainer(
@@ -14,26 +15,8 @@ export default (signedIn = false) =>
         }),
         App: createBottomTabNavigator(
           {
-            Initial: {
-              screen: createStackNavigator(
-                {
-                  Main,
-                },
-                {
-                  defaultNavigationOptions: {
-                    headerTransparent: true,
-                    headerLeftContainerStyle: {
-                      marginLeft: 3,
-                    },
-                  },
-                }
-              ),
-              navigationOptions: {
-                tabBarLabel: 'Menu',
-                tabBarVisible: true,
-              },
-            },
             Main,
+            Annotation,
           },
           {
             tabBarOptions: {
