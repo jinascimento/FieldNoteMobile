@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Alert, TextInput } from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
 import {
   Container,
   Form,
@@ -14,12 +15,20 @@ import api from '../../services/api';
 
 export default function Annotation({ navigation }) {
   const [description, setDescription] = useState([]);
+  const [coordinates, setCoordinates] = useState({});
+
+  useEffect(() => {
+    Geolocation.getCurrentPosition(({ coords }) => {
+      setCoordinates(coords);
+    });
+  }, []);
 
   async function handleAddAnnotation() {
+    console.tron.log(coordinates)
     try {
       await api.post('/api/v1/annotations', {
-        latitude: -21.224535,
-        longitude: -43.771443,
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
         description,
       });
       navigation.navigate('Main');
