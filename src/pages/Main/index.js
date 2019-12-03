@@ -1,45 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
-import MapView from 'react-native-maps';
 import MapboxGL from '@mapbox/react-native-mapbox-gl';
 import Geolocation from '@react-native-community/geolocation';
-import { Container, Title } from './styles';
+import { Container, AnnotationContainer, AnnotationText } from './styles';
 
 import api from '../../services/api';
-
-// const styles = StyleSheet.create({
-//   container: {
-//     ...StyleSheet.absoluteFill,
-//     backgroundColor: '#7159c1',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   map: {
-//     ...StyleSheet.absoluteFillObject,
-//   },
-// });
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  annotationContainer: {
-    width: 30,
-    height: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    borderRadius: 15,
-  },
-  annotationFill: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#7159C1',
-    transform: [{ scale: 0.8 }],
-  },
-});
 
 MapboxGL.setAccessToken(
   'pk.eyJ1IjoiamluYXNjaW1lbnRvIiwiYSI6ImNrM3BjdHNhaDAxdTQzZHA1ODcwOHIzbmoifQ.t0lQl_VjL_5VrIf9luZJXw'
@@ -48,7 +14,24 @@ MapboxGL.setAccessToken(
 function Main() {
   const [loading, setLoading] = useState(true);
   const [coordinates, setCoordinates] = useState({});
-  const [annotations, setAnnotations] = useState([]);
+  const [annotations, setAnnotations] = useState({});
+
+  function renderAnnotations() {
+    return annotations.map(annotation => (
+      <MapboxGL.PointAnnotation
+        id={annotation.id.toString()}
+        coordinate={[
+          parseFloat(annotation.longitude),
+          parseFloat(annotation.latitude),
+        ]}
+      >
+        <AnnotationContainer>
+          <AnnotationText>{annotation.id.toString()}</AnnotationText>
+        </AnnotationContainer>
+        <MapboxGL.Callout title={annotation.description} />
+      </MapboxGL.PointAnnotation>
+    ));
+  }
 
   useEffect(() => {
     Geolocation.getCurrentPosition(
@@ -61,26 +44,34 @@ function Main() {
     );
   }, []);
 
-  async function loadAnnotations() {
-    const response = await api.get('/api/v1/annotations');
-    setAnnotations(response.data);
-  }
+  useEffect(() => {
+    async function loadAnnotations() {
+      try {
+        const response = await api.get('/api/v1/annotations');
+        setAnnotations(response.data);
+      } catch (e) {
+        console.tron.log(e.message);
+      }
+    }
+
+    loadAnnotations();
+  }, []);
 
   return (
-    <View style={styles.container}>
+    <Container>
       {loading ? (
         <ActivityIndicator size="large" />
       ) : (
         <MapboxGL.MapView
           centerCoordinate={[coordinates.longitude, coordinates.latitude]}
-          style={styles.container}
+          style={{ flex: 1 }}
           showUserLocation
           styleURL={MapboxGL.StyleURL.Dark}
         >
-          {}
+          {renderAnnotations()}
         </MapboxGL.MapView>
       )}
-    </View>
+    </Container>
   );
 }
 
