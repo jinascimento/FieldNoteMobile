@@ -2,22 +2,48 @@ import React, { useEffect, useState } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import MapView from 'react-native-maps';
+import MapboxGL from '@mapbox/react-native-mapbox-gl';
 import Geolocation from '@react-native-community/geolocation';
 import { Container, Title } from './styles';
 
 import api from '../../services/api';
 
+// const styles = StyleSheet.create({
+//   container: {
+//     ...StyleSheet.absoluteFill,
+//     backgroundColor: '#7159c1',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   map: {
+//     ...StyleSheet.absoluteFillObject,
+//   },
+// });
+
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFill,
-    backgroundColor: '#7159c1',
+    flex: 1,
+  },
+  annotationContainer: {
+    width: 30,
+    height: 30,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: 15,
   },
-  map: {
-    ...StyleSheet.absoluteFillObject,
+  annotationFill: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#7159C1',
+    transform: [{ scale: 0.8 }],
   },
 });
+
+MapboxGL.setAccessToken(
+  'pk.eyJ1IjoiamluYXNjaW1lbnRvIiwiYSI6ImNrM3BjdHNhaDAxdTQzZHA1ODcwOHIzbmoifQ.t0lQl_VjL_5VrIf9luZJXw'
+);
 
 function Main() {
   const [loading, setLoading] = useState(true);
@@ -45,17 +71,14 @@ function Main() {
       {loading ? (
         <ActivityIndicator size="large" />
       ) : (
-        <MapView
-          initialRegion={{
-            latitude: coordinates.latitude,
-            longitude: coordinates.longitude,
-            latitudeDelta: 0.0068,
-            longitudeDelta: 0.0068,
-          }}
-          style={styles.map}
+        <MapboxGL.MapView
+          centerCoordinate={[coordinates.longitude, coordinates.latitude]}
+          style={styles.container}
+          showUserLocation
+          styleURL={MapboxGL.StyleURL.Dark}
         >
           {}
-        </MapView>
+        </MapboxGL.MapView>
       )}
     </View>
   );

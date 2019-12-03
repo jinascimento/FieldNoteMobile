@@ -15,16 +15,22 @@ target 'FieldNoteMobile' do
       'CxxBridge',
       'DevSupport',
       'RCTActionSheet',
+      'RCTBlob',
+      'RCTCameraRoll',
       'RCTAnimation',
       'RCTGeolocation',
       'RCTImage',
       'RCTLinkingIOS',
       'RCTNetwork',
+      'RCTPushNotification',
+      'RCTTest',
       'RCTSettings',
       'RCTText',
       'RCTVibration',
       'RCTWebSocket',
     ]
+    # mapbox
+    pod 'react-native-mapbox-gl', :path => '../node_modules/@mapbox/react-native-mapbox-gl'
 
     # React Native third party dependencies podspecs
     pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"
