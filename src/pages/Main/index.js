@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
 import MapboxGL from '@mapbox/react-native-mapbox-gl';
 import Geolocation from '@react-native-community/geolocation';
-import { Container, AnnotationContainer, AnnotationText } from './styles';
+import { annotationRequest } from '../../store/modules/annotation/actions';
 
+import getRealm from '../../services/realm';
+import { Container, AnnotationContainer, AnnotationText } from './styles';
 import api from '../../services/api';
 
 MapboxGL.setAccessToken(
@@ -12,18 +16,11 @@ MapboxGL.setAccessToken(
 );
 
 function Main({ isFocused }) {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [coordinates, setCoordinates] = useState({});
-  const [annotations, setAnnotations] = useState({});
-
-  async function loadAnnotations() {
-    try {
-      const response = await api.get('/api/v1/annotations');
-      setAnnotations(response.data);
-    } catch (e) {
-      console.tron.log(e.message);
-    }
-  }
+  const annotations = useSelector(state => state.annotation.annotations);
+  const [annotationsRealm, setAnnotationsRealm] = useState([]);
 
   function renderAnnotations() {
     return annotations.map(annotation => (
@@ -47,9 +44,23 @@ function Main({ isFocused }) {
 
   useEffect(() => {
     if (isFocused) {
-      loadAnnotations();
+      dispatch(annotationRequest());
     }
   }, [isFocused]);
+
+  // useEffect(() => {
+  //   async function loadAnnotationsOnRealm() {
+  //     const realm = await getRealm();
+  //
+  //     const data = realm.objects('Annotation');
+  //
+  //     setAnnotationsRealm(data);
+  //
+  //     console.tron.log(annotationsRealm);
+  //   }
+  //
+  //   loadAnnotationsOnRealm();
+  // }, []);
 
   useEffect(() => {
     Geolocation.getCurrentPosition(
@@ -82,6 +93,10 @@ function Main({ isFocused }) {
 
 Main.navigationOptions = {
   title: 'Anotações',
+};
+
+Main.propTypes = {
+  isFocused: PropTypes.func.isRequired,
 };
 
 export default withNavigationFocus(Main);
