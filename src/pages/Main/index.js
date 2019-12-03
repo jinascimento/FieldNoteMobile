@@ -11,10 +11,19 @@ MapboxGL.setAccessToken(
   'pk.eyJ1IjoiamluYXNjaW1lbnRvIiwiYSI6ImNrM3BjdHNhaDAxdTQzZHA1ODcwOHIzbmoifQ.t0lQl_VjL_5VrIf9luZJXw'
 );
 
-function Main() {
+function Main({ isFocused }) {
   const [loading, setLoading] = useState(true);
   const [coordinates, setCoordinates] = useState({});
   const [annotations, setAnnotations] = useState({});
+
+  async function loadAnnotations() {
+    try {
+      const response = await api.get('/api/v1/annotations');
+      setAnnotations(response.data);
+    } catch (e) {
+      console.tron.log(e.message);
+    }
+  }
 
   function renderAnnotations() {
     return annotations.map(annotation => (
@@ -30,10 +39,17 @@ function Main() {
           <AnnotationText>{annotation.id.toString()}</AnnotationText>
         </AnnotationContainer>
         <MapboxGL.Callout
-          title={annotation.description} style={{width: 152, height: 80}} />
+          title={annotation.description}
+          style={{ width: 152, height: 80 }} />
       </MapboxGL.PointAnnotation>
     ));
   }
+
+  useEffect(() => {
+    if (isFocused) {
+      loadAnnotations();
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     Geolocation.getCurrentPosition(
@@ -44,19 +60,6 @@ function Main() {
       error => console.tron.log(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
-  }, []);
-
-  useEffect(() => {
-    async function loadAnnotations() {
-      try {
-        const response = await api.get('/api/v1/annotations');
-        setAnnotations(response.data);
-      } catch (e) {
-        console.tron.log(e.message);
-      }
-    }
-
-    loadAnnotations();
   }, []);
 
   return (
