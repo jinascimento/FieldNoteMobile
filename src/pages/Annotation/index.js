@@ -8,6 +8,8 @@ import {
   inputTextArea,
   SubmitButton,
   SubmitButtonText,
+  CancelButton,
+  ContainerButton,
   Title,
 } from './styles';
 
@@ -23,8 +25,12 @@ export default function Annotation({ navigation }) {
     });
   }, []);
 
+  function handleCancel() {
+    setDescription('');
+    navigation.navigate('Main');
+  }
+
   async function handleAddAnnotation() {
-    console.tron.log(coordinates)
     try {
       await api.post('/api/v1/annotations', {
         latitude: coordinates.latitude,
@@ -56,10 +62,15 @@ export default function Annotation({ navigation }) {
           value={description}
           onChangeText={setDescription}
         />
+        <ContainerButton>
+          <CancelButton onPress={handleCancel}>
+            <SubmitButtonText>Cancelar</SubmitButtonText>
+          </CancelButton>
 
-        <SubmitButton onPress={handleAddAnnotation}>
-          <SubmitButtonText>Anotar</SubmitButtonText>
-        </SubmitButton>
+          <SubmitButton onPress={handleAddAnnotation}>
+            <SubmitButtonText>Anotar</SubmitButtonText>
+          </SubmitButton>
+        </ContainerButton>
       </Form>
     </Container>
   );

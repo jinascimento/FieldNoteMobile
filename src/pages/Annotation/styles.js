@@ -34,12 +34,29 @@ export const inputTextArea = StyleSheet.create({
   },
 });
 
+export const ContainerButton = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 export const SubmitButton = styled(RectButton)`
   height: 46px;
   background: rgba(24, 141, 64, 0.98);
   border-radius: 20px;
   margin-top: 100px;
   margin-bottom: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 48%;
+`;
+
+export const CancelButton = styled(RectButton)`
+  height: 46px;
+  background: rgba(200,53,65,0.98);
+  border-radius: 20px;
+  margin-top: 100px;
+  margin-bottom: 40px;
+  width: 48%;
   align-items: center;
   justify-content: center;
 `;
