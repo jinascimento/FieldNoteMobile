@@ -50,6 +50,8 @@ target 'FieldNoteMobile' do
 
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+    pod 'RealmJS', :path => '../node_modules/realm'
+
   end
 
   post_install do |installer|

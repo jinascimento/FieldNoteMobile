@@ -20,7 +20,6 @@ function Main({ isFocused }) {
   const [loading, setLoading] = useState(true);
   const [coordinates, setCoordinates] = useState({});
   const annotations = useSelector(state => state.annotation.annotations);
-  const [annotationsRealm, setAnnotationsRealm] = useState([]);
 
   function renderAnnotations() {
     return annotations.map(annotation => (

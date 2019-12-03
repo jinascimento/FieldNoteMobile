@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Alert, TextInput } from 'react-native';
+import { TextInput, Keyboard } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
+import getRealm from '../../services/realm';
 import {
   Container,
   Form,
@@ -31,6 +32,23 @@ export default function Annotation({ navigation }) {
   }
 
   async function handleAddAnnotation() {
+    Keyboard.dismiss();
+    const data = {
+      id: 1,
+      latitude: coordinates.latitude,
+      longitude: coordinates.longitude,
+      description,
+    };
+
+    try {
+      const realm = await getRealm();
+      realm.write(() => {
+        realm.create('Annotation', data);
+      });
+    } catch (e) {
+      console.tron.log(e.message);
+    }
+
     try {
       await api.post('/api/v1/annotations', {
         latitude: coordinates.latitude,
@@ -44,6 +62,8 @@ export default function Annotation({ navigation }) {
         'Houve um erro ao salvar a anotação, verifique se foi preenchido corretamente!'
       );
     }
+
+    navigation.navigate('Main');
   }
 
   return (

@@ -64,10 +64,6 @@
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		F5B8D6FA81EC45AC8FC8FB57 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA9F24F8AB1B42518680FB93 /* FontAwesome5_Regular.ttf */; };
-		FAE3865423954D9800C4CED2 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE3862523954D9700C4CED2 /* GoogleMapsCore.framework */; };
-		FAE3865523954D9800C4CED2 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE3865223954D9800C4CED2 /* GoogleMapsBase.framework */; };
-		FAE3865623954D9800C4CED2 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE3865323954D9800C4CED2 /* GoogleMaps.framework */; };
-		FAE3865823954DC800C4CED2 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FAE3865723954DC700C4CED2 /* GoogleMaps.bundle */; };
 		FAE3865A23954E1000C4CED2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE3865923954E0F00C4CED2 /* Accelerate.framework */; };
 		FAE3865C23954E1600C4CED2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE3865B23954E1600C4CED2 /* CoreData.framework */; };
 		FAE3865E23954E1B00C4CED2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE3865D23954E1B00C4CED2 /* CoreGraphics.framework */; };
@@ -477,10 +473,6 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		EDFF319188364BB1AF05593A /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		FA0AB5212395E7780031B74A /* RNCGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCGeolocation.xcodeproj; path = "../node_modules/@react-native-community/geolocation/ios/RNCGeolocation.xcodeproj"; sourceTree = "<group>"; };
-		FAE3862523954D9700C4CED2 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsCore.framework; path = "../../../Downloads/GoogleMaps-3.6.0/Maps/Frameworks/GoogleMapsCore.framework"; sourceTree = "<group>"; };
-		FAE3865223954D9800C4CED2 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = "../../../Downloads/GoogleMaps-3.6.0/Base/Frameworks/GoogleMapsBase.framework"; sourceTree = "<group>"; };
-		FAE3865323954D9800C4CED2 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = "../../../Downloads/GoogleMaps-3.6.0/Maps/Frameworks/GoogleMaps.framework"; sourceTree = "<group>"; };
-		FAE3865723954DC700C4CED2 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = "../../../Downloads/GoogleMaps-3.6.0/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle"; sourceTree = "<group>"; };
 		FAE3865923954E0F00C4CED2 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		FAE3865B23954E1600C4CED2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		FAE3865D23954E1B00C4CED2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -531,17 +523,14 @@
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
-				FAE3865523954D9800C4CED2 /* GoogleMapsBase.framework in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
-				FAE3865423954D9800C4CED2 /* GoogleMapsCore.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				FAE3865623954D9800C4CED2 /* GoogleMaps.framework in Frameworks */,
 				4895512398F44F05BA53D0D4 /* libRNScreens.a in Frameworks */,
 				2D8DB7E338D24F6A82BA3833 /* libRNGestureHandler.a in Frameworks */,
 				C9120E027E7D4D79996F363D /* libRNReanimated.a in Frameworks */,
@@ -808,10 +797,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				FAE3865723954DC700C4CED2 /* GoogleMaps.bundle */,
-				FAE3865323954D9800C4CED2 /* GoogleMaps.framework */,
-				FAE3865223954D9800C4CED2 /* GoogleMapsBase.framework */,
-				FAE3862523954D9700C4CED2 /* GoogleMapsCore.framework */,
 				13B07FAE1A68108700A75B9A /* FieldNoteMobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* FieldNoteMobileTests */,
@@ -1426,7 +1411,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAE3865823954DC800C4CED2 /* GoogleMaps.bundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				958AA5DDBEEE4341AFD8D973 /* AntDesign.ttf in Resources */,
