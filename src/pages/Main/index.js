@@ -24,11 +24,13 @@ function Main() {
           parseFloat(annotation.longitude),
           parseFloat(annotation.latitude),
         ]}
+        title={annotation.description}
       >
         <AnnotationContainer>
           <AnnotationText>{annotation.id.toString()}</AnnotationText>
         </AnnotationContainer>
-        <MapboxGL.Callout title={annotation.description} />
+        <MapboxGL.Callout
+          title={annotation.description} style={{width: 152, height: 80}} />
       </MapboxGL.PointAnnotation>
     ));
   }
