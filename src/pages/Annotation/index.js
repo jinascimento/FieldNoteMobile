@@ -18,7 +18,6 @@ import {
 import api from '../../services/api';
 
 export default function Annotation({ navigation }) {
-  const annotations = useSelector(state => state.annotation.annotations);
   const [description, setDescription] = useState([]);
   const [coordinates, setCoordinates] = useState({});
 
@@ -37,7 +36,7 @@ export default function Annotation({ navigation }) {
     const notedAt = new Date();
     notedAt.setHours(notedAt.getHours() - 3);
 
-    const data = {
+    const annotation = {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
       description,
@@ -47,17 +46,18 @@ export default function Annotation({ navigation }) {
     if (description) {
       try {
         await api.post('/api/v1/annotations', {
-          data,
+          annotation,
         });
-        data.synced = true;
+        annotation.synced = true;
         realm.write(() => {
-          realm.create('Annotation', data);
+          realm.create('Annotation', annotation);
         });
       } catch (e) {
-        data.id = annotations.length + 1;
-        data.synced = false;
+        const annotations = realm.objects('Annotation');
+        annotation.id = annotations.length + 1;
+        annotation.synced = false;
         realm.write(() => {
-          realm.create('Annotation', data);
+          realm.create('Annotation', annotation);
         });
       }
     } else {

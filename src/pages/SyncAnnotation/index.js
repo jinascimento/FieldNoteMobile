@@ -12,10 +12,8 @@ import {
 
 import api from '../../services/api';
 import {
-  CancelButton,
   ContainerButton,
   Form,
-  inputTextArea,
 } from '../Annotation/styles';
 
 export default function SyncAnnotation({ navigation }) {
@@ -24,8 +22,8 @@ export default function SyncAnnotation({ navigation }) {
   useEffect(() => {
     async function loadAnnotations() {
       const realm = await getRealm();
-      const annotation = realm.objects('Annotation');
-      const annotationsNotSync = annotation.filtered('synced = false');
+      const annotations = realm.objects('Annotation');
+      const annotationsNotSync = annotations.filtered('synced = false');
       setAnnotationsToSync(annotationsNotSync);
     }
 
