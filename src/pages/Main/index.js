@@ -1,28 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { ActivityIndicator } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  ActivityIndicator,
+  Modal,
+  Text,
+} from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import MapboxGL from '@mapbox/react-native-mapbox-gl';
 import Geolocation from '@react-native-community/geolocation';
 
-import AnnotationModal from '../../components/AnnotationModal';
-import { Container, AnnotationContainer, AnnotationText } from './styles';
+import {
+  Container,
+  ContainerModal,
+  AnnotationContainer,
+  AnnotationText,
+  CardData,
+  TitleField,
+  Title,
+  ButtonClose,
+} from './styles';
 import getRealm from '../../services/realm';
 
 MapboxGL.setAccessToken(process.env.MAP_BOX_TOKEN);
 
 function Main({ isFocused }) {
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [coordinates, setCoordinates] = useState({});
-  const [annotationModal, setAnnotationModal] = useState({});
   const [annotations, setAnnotations] = useState([]);
+  const [annotationTargetModal, setAnnotationTargetModal] = useState({});
   const [displayModal, setDisplayModal] = useState(false);
 
-  function triggerModal(annotation) {
-    setDisplayModal(true);
-    setAnnotationModal(annotation);
+  function triggerModal(isDisplay, annotation = {}) {
+    setAnnotationTargetModal(annotation);
+    setDisplayModal(isDisplay);
   }
 
   function renderAnnotations() {
@@ -36,9 +46,7 @@ function Main({ isFocused }) {
         title={annotation.description}
       >
         <AnnotationContainer synced={annotation.synced === false}>
-          <AnnotationText onPress={() => triggerModal(annotation)}>
-            o
-          </AnnotationText>
+          <AnnotationText onPress={() => triggerModal(true, annotation)}>o</AnnotationText>
         </AnnotationContainer>
       </MapboxGL.PointAnnotation>
     ));
@@ -67,27 +75,37 @@ function Main({ isFocused }) {
   }, []);
 
   return (
-    <>
-      <AnnotationModal
-        description={annotationModal.description || ''}
-        date={annotationModal.noted_at || new Date().toString()}
-        display={displayModal}
-      />
-      <Container>
-        {loading ? (
-          <ActivityIndicator size="large" />
-        ) : (
-          <MapboxGL.MapView
-            centerCoordinate={[coordinates.longitude, coordinates.latitude]}
-            style={{ flex: 1 }}
-            showUserLocation
-            styleURL={MapboxGL.StyleURL.Dark}
-          >
-            {renderAnnotations()}
-          </MapboxGL.MapView>
-        )}
-      </Container>
-    </>
+    <Container>
+      <Modal
+        visible={displayModal}
+        animationType="slide"
+      >
+        <ContainerModal>
+          <Title>Dados da anotação realizada</Title>
+          <ButtonClose
+            title="Fechar"
+            onPress={() => triggerModal(false)} />
+          <CardData>
+            <TitleField>Descrição:</TitleField>
+            <Text>{annotationTargetModal.description}</Text>
+            <TitleField>Data e hora:</TitleField>
+            <Text>{console.tron.log(annotationTargetModal)}</Text>
+          </CardData>
+        </ContainerModal>
+      </Modal>
+      {loading ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <MapboxGL.MapView
+          centerCoordinate={[coordinates.longitude, coordinates.latitude]}
+          style={{ flex: 1 }}
+          showUserLocation
+          styleURL={MapboxGL.StyleURL.Dark}
+        >
+          {renderAnnotations()}
+        </MapboxGL.MapView>
+      )}
+    </Container>
   );
 }
 

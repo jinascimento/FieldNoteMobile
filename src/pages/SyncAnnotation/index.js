@@ -51,6 +51,8 @@ export default function SyncAnnotation({ navigation }) {
           'Ocorreu um erro ao sincronizar, tente novamente mais tarde'
         );
       }
+
+      Alert.alert('Successo!', 'Todas as anotações foram sincronizadas');
     });
   }
 
