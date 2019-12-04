@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { TextInput, Keyboard, Alert, NetInfo } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import getRealm from '../../services/realm';
@@ -17,6 +18,7 @@ import {
 import api from '../../services/api';
 
 export default function Annotation({ navigation }) {
+  const annotations = useSelector(state => state.annotation.annotations);
   const [description, setDescription] = useState([]);
   const [coordinates, setCoordinates] = useState({});
 
@@ -32,10 +34,14 @@ export default function Annotation({ navigation }) {
   }
 
   async function handleAddAnnotation() {
+    const notedAt = new Date();
+    notedAt.setHours(notedAt.getHours() - 3);
+
     const data = {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
       description,
+      noted_at: notedAt,
     };
     const realm = await getRealm();
     await NetInfo.isConnected.fetch().then(isConnected => {
@@ -52,10 +58,8 @@ export default function Annotation({ navigation }) {
         }
       } else {
         try {
-          data.id = realm.objects('Annotation').length + 1;
-          const notedAt = new Date();
-          notedAt.setHours(notedAt.getHours() - 3);
-          data.noted_at = notedAt;
+          data.id = annotations.length + 1;
+          data.synced = false;
           realm.write(() => {
             realm.create('Annotation', data);
           });

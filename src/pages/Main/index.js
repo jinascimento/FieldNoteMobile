@@ -7,13 +7,9 @@ import MapboxGL from '@mapbox/react-native-mapbox-gl';
 import Geolocation from '@react-native-community/geolocation';
 import { annotationRequest } from '../../store/modules/annotation/actions';
 
-import getRealm from '../../services/realm';
 import { Container, AnnotationContainer, AnnotationText } from './styles';
-import api from '../../services/api';
 
-MapboxGL.setAccessToken(
-  'pk.eyJ1IjoiamluYXNjaW1lbnRvIiwiYSI6ImNrM3BjdHNhaDAxdTQzZHA1ODcwOHIzbmoifQ.t0lQl_VjL_5VrIf9luZJXw'
-);
+MapboxGL.setAccessToken(process.env.MAP_BOX_TOKEN);
 
 function Main({ isFocused }) {
   const dispatch = useDispatch();
@@ -31,12 +27,13 @@ function Main({ isFocused }) {
         ]}
         title={annotation.description}
       >
-        <AnnotationContainer synced={true}>
-          <AnnotationText>{'o'}</AnnotationText>
+        <AnnotationContainer synced={annotation.synced === false}>
+          <AnnotationText>o</AnnotationText>
         </AnnotationContainer>
         <MapboxGL.Callout
           title={annotation.description}
-          style={{ width: 152, height: 80 }} />
+          style={{ width: 152, height: 80 }}
+        />
       </MapboxGL.PointAnnotation>
     ));
   }

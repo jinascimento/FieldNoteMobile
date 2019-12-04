@@ -5,7 +5,7 @@ export const Container = styled.View`
 `;
 
 export const AnnotationContainer = styled.View.attrs(props => ({
-  backgroundColor: props.synced ? '#11bf50' : '#fc6663'
+  backgroundColor: props.synced ? '#fc6663' : '#11bf50'
 }))`
   align-items: center;
   justify-content: center;

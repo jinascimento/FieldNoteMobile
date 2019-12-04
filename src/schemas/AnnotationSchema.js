@@ -8,6 +8,7 @@ export default class AnnotationSchema {
       description: 'string',
       longitude: 'float',
       latitude: 'float',
+      synced: 'bool',
     },
   };
 }
