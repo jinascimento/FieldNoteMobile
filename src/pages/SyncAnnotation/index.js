@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Alert} from 'react-native';
 import PropTypes from 'prop-types';
 import getRealm from '../../services/realm';
 import { Container, SubmitButton, SubmitButtonText, Title, ProgressBar } from './styles';
@@ -24,8 +25,21 @@ export default function SyncAnnotation({ navigation }) {
     loadAnnotations();
   }, []);
 
-  async function handleSync() {
-    console.tron.log('sincronizar');
+  function handleSync() {
+    annotationsToSync.forEach(async annotation => {
+      const realm = await getRealm();
+      try {
+        await api.post('/api/v1/annotations', {
+          annotation,
+        });
+        realm.write(() => {
+          annotation.synced = true;
+        });
+        navigation.navigate('Main');
+      } catch (e) {
+        Alert.alert('Erro', 'Ocorreu um erro ao sincronizar, tente novamente mais tarde')
+      }
+    })
   }
 
   return (
