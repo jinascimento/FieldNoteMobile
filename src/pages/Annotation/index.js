@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { TextInput, Keyboard, Alert } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import getRealm from '../../services/realm';
@@ -59,14 +58,16 @@ export default function Annotation({ navigation }) {
         realm.write(() => {
           realm.create('Annotation', annotation);
         });
+
+        Alert.alert('Sucesso!', 'Anotação realizada.');
       }
     } else {
       Alert.alert(
-          'Erro',
-          'Houve um erro ao salvar a anotação, verifique se foi preenchido corretamente!'
+        'Erro',
+        'Houve um erro ao salvar a anotação, verifique se foi preenchido corretamente!'
       );
     }
-
+    setDescription('');
     Keyboard.dismiss();
     navigation.navigate('Main');
   }
