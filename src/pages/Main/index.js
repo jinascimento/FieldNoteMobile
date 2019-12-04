@@ -31,8 +31,8 @@ function Main({ isFocused }) {
         ]}
         title={annotation.description}
       >
-        <AnnotationContainer>
-          <AnnotationText>{annotation.id.toString()}</AnnotationText>
+        <AnnotationContainer synced={true}>
+          <AnnotationText>{'o'}</AnnotationText>
         </AnnotationContainer>
         <MapboxGL.Callout
           title={annotation.description}
@@ -46,20 +46,6 @@ function Main({ isFocused }) {
       dispatch(annotationRequest());
     }
   }, [isFocused]);
-
-  // useEffect(() => {
-  //   async function loadAnnotationsOnRealm() {
-  //     const realm = await getRealm();
-  //
-  //     const data = realm.objects('Annotation');
-  //
-  //     setAnnotationsRealm(data);
-  //
-  //     console.tron.log(annotationsRealm);
-  //   }
-  //
-  //   loadAnnotationsOnRealm();
-  // }, []);
 
   useEffect(() => {
     Geolocation.getCurrentPosition(

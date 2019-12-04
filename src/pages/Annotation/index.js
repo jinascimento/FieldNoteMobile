@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput, Keyboard, Alert } from 'react-native';
+import { TextInput, Keyboard, Alert, NetInfo } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import getRealm from '../../services/realm';
 import {
@@ -32,38 +32,40 @@ export default function Annotation({ navigation }) {
   }
 
   async function handleAddAnnotation() {
-    Keyboard.dismiss();
     const data = {
-      id: 2,
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
       description,
     };
+    const realm = await getRealm();
+    await NetInfo.isConnected.fetch().then(isConnected => {
+      if (isConnected) {
+        try {
+          api.post('/api/v1/annotations', {
+            data,
+          });
+        } catch (e) {
+          Alert.alert(
+            'Erro',
+            'Houve um erro ao salvar a anotação, verifique se foi preenchido corretamente!'
+          );
+        }
+      } else {
+        try {
+          data.id = realm.objects('Annotation').length + 1;
+          const notedAt = new Date();
+          notedAt.setHours(notedAt.getHours() - 3);
+          data.noted_at = notedAt;
+          realm.write(() => {
+            realm.create('Annotation', data);
+          });
+        } catch (e) {
+          console.tron.log(e.message);
+        }
+      }
+    });
 
-    try {
-      const realm = await getRealm();
-      console.tron.log(realm.path)
-      realm.write(() => {
-        realm.create('Annotation', data);
-      });
-    } catch (e) {
-      console.tron.log(e.message);
-    }
-
-    try {
-      await api.post('/api/v1/annotations', {
-        latitude: coordinates.latitude,
-        longitude: coordinates.longitude,
-        description,
-      });
-      navigation.navigate('Main');
-    } catch (e) {
-      Alert.alert(
-        'Erro',
-        'Houve um erro ao salvar a anotação, verifique se foi preenchido corretamente!'
-      );
-    }
-
+    Keyboard.dismiss();
     navigation.navigate('Main');
   }
 

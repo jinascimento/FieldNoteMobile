@@ -47,6 +47,7 @@ target 'FieldNoteMobile' do
 
     pod 'RealmJS', :path => '../node_modules/realm'
 
+
   end
 
   post_install do |installer|

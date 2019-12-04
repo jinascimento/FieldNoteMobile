@@ -10,6 +10,9 @@
     "lint": "eslint .",
     "postinstall": "jetifier -r && sudo node node_modules/realm/scripts/download-realm.js ios --sync"
   },
+  "engine": {
+    "node": "v8.16.2"
+  },
   "dependencies": {
     "@mapbox/react-native-mapbox-gl": "^6.1.3",
     "@react-native-community/async-storage": "^1.6.3",

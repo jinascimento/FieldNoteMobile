@@ -4,10 +4,11 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-export const AnnotationContainer = styled.View`
+export const AnnotationContainer = styled.View.attrs(props => ({
+  backgroundColor: props.synced ? '#11bf50' : '#fc6663'
+}))`
   align-items: center;
   justify-content: center;
-  background-color: #fc6663;
   border-radius: 5px;
   padding: 5px;
 `;

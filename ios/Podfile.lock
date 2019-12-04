@@ -15,6 +15,8 @@ PODS:
     - React
   - react-native-mapbox-gl (6.1.3):
     - React
+  - react-native-netinfo (4.6.1):
+    - React
   - React/Core (0.59.4):
     - yoga (= 0.59.4.React)
   - React/CxxBridge (0.59.4):
@@ -88,6 +90,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - "react-native-mapbox-gl (from `../node_modules/@mapbox/react-native-mapbox-gl`)"
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -127,6 +130,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-mapbox-gl:
     :path: "../node_modules/@mapbox/react-native-mapbox-gl"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   RealmJS:
     :path: "../node_modules/realm"
   RNVectorIcons:
@@ -143,10 +148,11 @@ SPEC CHECKSUMS:
   React: 5cb71fb1a15b5ce04794ab49e24b48ebe4c94e65
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-mapbox-gl: d0ac3b81a6cadbd7cadc80891da72e3e85379350
+  react-native-netinfo: a59d8426a8484f739fe3a95dd6ad5af1435db05f
   RealmJS: ec3a5d6401cb84493efc61e39c400389121af96d
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   yoga: 596e61c9b57751d08a22b07aba310dbd3e65ab75
 
-PODFILE CHECKSUM: daccd97a1478a292f1c74e00960c128a214d1f46
+PODFILE CHECKSUM: 63ea4976efd0ca49eb2eb92496d47b76ff00605c
 
 COCOAPODS: 1.7.5
