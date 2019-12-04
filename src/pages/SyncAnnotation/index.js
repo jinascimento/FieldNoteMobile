@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Alert} from 'react-native';
+import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import getRealm from '../../services/realm';
-import { Container, SubmitButton, SubmitButtonText, Title, ProgressBar } from './styles';
+import {
+  Container,
+  SubmitButton,
+  SubmitButtonText,
+  Title,
+  ProgressBar,
+} from './styles';
 
 import api from '../../services/api';
 import {
@@ -19,13 +25,18 @@ export default function SyncAnnotation({ navigation }) {
     async function loadAnnotations() {
       const realm = await getRealm();
       const annotation = realm.objects('Annotation');
-      setAnnotationsToSync(annotation);
+      const annotationsNotSync = annotation.filtered('synced = false');
+      setAnnotationsToSync(annotationsNotSync);
     }
 
     loadAnnotations();
   }, []);
 
   function handleSync() {
+    if (annotationsToSync.length === 0) {
+      Alert.alert('Tudo ok!', 'Todas as anotações já estão sincronizadas');
+    }
+
     annotationsToSync.forEach(async annotation => {
       const realm = await getRealm();
       try {
@@ -37,9 +48,12 @@ export default function SyncAnnotation({ navigation }) {
         });
         navigation.navigate('Main');
       } catch (e) {
-        Alert.alert('Erro', 'Ocorreu um erro ao sincronizar, tente novamente mais tarde')
+        Alert.alert(
+          'Erro',
+          'Ocorreu um erro ao sincronizar, tente novamente mais tarde'
+        );
       }
-    })
+    });
   }
 
   return (
