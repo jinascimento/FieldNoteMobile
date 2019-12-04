@@ -1,10 +1,10 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createStackNavigator } from 'react-navigation-stack';
 
 import Main from './pages/Main';
 import Signin from './pages/Signin';
 import Annotation from './pages/Annotation';
+import SyncAnnotation from './pages/SyncAnnotation';
 
 export default (signedIn = false) =>
   createAppContainer(
@@ -17,6 +17,7 @@ export default (signedIn = false) =>
           {
             Main,
             Annotation,
+            SyncAnnotation,
           },
           {
             tabBarOptions: {

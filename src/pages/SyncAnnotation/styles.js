@@ -26,13 +26,9 @@ export const Form = styled.View`
   flex: 1;
 `;
 
-export const inputTextArea = StyleSheet.create({
-  textInputStyle: {
-    borderColor: '#ede8f7',
-    color: '#2f76b4',
-    flex: 1,
-  },
-});
+export const ProgressBar = styled.View`
+  flex: 1;
+`;
 
 export const ContainerButton = styled.View`
   flex-direction: row;
@@ -47,19 +43,9 @@ export const SubmitButton = styled(RectButton)`
   margin-bottom: 40px;
   align-items: center;
   justify-content: center;
-  width: 48%;
+  width: 100%;
 `;
 
-export const CancelButton = styled(RectButton)`
-  height: 46px;
-  background: rgba(200,53,65,0.98);
-  border-radius: 20px;
-  margin-top: 100px;
-  margin-bottom: 40px;
-  width: 48%;
-  align-items: center;
-  justify-content: center;
-`;
 
 export const SubmitButtonText = styled.Text`
   font-size: 16px;

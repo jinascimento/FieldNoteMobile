@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { TextInput, Keyboard, Alert, NetInfo } from 'react-native';
+import { TextInput, Keyboard, Alert } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import getRealm from '../../services/realm';
 import {
@@ -44,30 +44,28 @@ export default function Annotation({ navigation }) {
       noted_at: notedAt,
     };
     const realm = await getRealm();
-    await NetInfo.isConnected.fetch().then(isConnected => {
-      if (isConnected) {
-        try {
-          api.post('/api/v1/annotations', {
-            data,
-          });
-        } catch (e) {
-          Alert.alert(
-            'Erro',
-            'Houve um erro ao salvar a anotação, verifique se foi preenchido corretamente!'
-          );
-        }
-      } else {
-        try {
-          data.id = annotations.length + 1;
-          data.synced = false;
-          realm.write(() => {
-            realm.create('Annotation', data);
-          });
-        } catch (e) {
-          console.tron.log(e.message);
-        }
+    if (description) {
+      try {
+        await api.post('/api/v1/annotations', {
+          data,
+        });
+        data.synced = true;
+        realm.write(() => {
+          realm.create('Annotation', data);
+        });
+      } catch (e) {
+        data.id = annotations.length + 1;
+        data.synced = false;
+        realm.write(() => {
+          realm.create('Annotation', data);
+        });
       }
-    });
+    } else {
+      Alert.alert(
+          'Erro',
+          'Houve um erro ao salvar a anotação, verifique se foi preenchido corretamente!'
+      );
+    }
 
     Keyboard.dismiss();
     navigation.navigate('Main');

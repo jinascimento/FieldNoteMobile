@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
 import MapboxGL from '@mapbox/react-native-mapbox-gl';
 import Geolocation from '@react-native-community/geolocation';
-import { annotationRequest } from '../../store/modules/annotation/actions';
 
+import AnnotationModal from '../../components/AnnotationModal';
 import { Container, AnnotationContainer, AnnotationText } from './styles';
+import getRealm from '../../services/realm';
 
 MapboxGL.setAccessToken(process.env.MAP_BOX_TOKEN);
 
@@ -15,7 +16,14 @@ function Main({ isFocused }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [coordinates, setCoordinates] = useState({});
-  const annotations = useSelector(state => state.annotation.annotations);
+  const [annotationModal, setAnnotationModal] = useState({});
+  const [annotations, setAnnotations] = useState([]);
+  const [displayModal, setDisplayModal] = useState(false);
+
+  function triggerModal(annotation) {
+    setDisplayModal(true);
+    setAnnotationModal(annotation);
+  }
 
   function renderAnnotations() {
     return annotations.map(annotation => (
@@ -28,20 +36,23 @@ function Main({ isFocused }) {
         title={annotation.description}
       >
         <AnnotationContainer synced={annotation.synced === false}>
-          <AnnotationText>o</AnnotationText>
+          <AnnotationText onPress={() => triggerModal(annotation)}>
+            o
+          </AnnotationText>
         </AnnotationContainer>
-        <MapboxGL.Callout
-          title={annotation.description}
-          style={{ width: 152, height: 80 }}
-        />
       </MapboxGL.PointAnnotation>
     ));
   }
 
   useEffect(() => {
-    if (isFocused) {
-      dispatch(annotationRequest());
+    async function loadAnnotations() {
+      const realm = await getRealm();
+      if (isFocused) {
+        const annotation = realm.objects('Annotation');
+        setAnnotations(annotation);
+      }
     }
+    loadAnnotations();
   }, [isFocused]);
 
   useEffect(() => {
@@ -56,20 +67,27 @@ function Main({ isFocused }) {
   }, []);
 
   return (
-    <Container>
-      {loading ? (
-        <ActivityIndicator size="large" />
-      ) : (
-        <MapboxGL.MapView
-          centerCoordinate={[coordinates.longitude, coordinates.latitude]}
-          style={{ flex: 1 }}
-          showUserLocation
-          styleURL={MapboxGL.StyleURL.Dark}
-        >
-          {renderAnnotations()}
-        </MapboxGL.MapView>
-      )}
-    </Container>
+    <>
+      <AnnotationModal
+        description={annotationModal.description || ''}
+        date={annotationModal.noted_at || new Date().toString()}
+        display={displayModal}
+      />
+      <Container>
+        {loading ? (
+          <ActivityIndicator size="large" />
+        ) : (
+          <MapboxGL.MapView
+            centerCoordinate={[coordinates.longitude, coordinates.latitude]}
+            style={{ flex: 1 }}
+            showUserLocation
+            styleURL={MapboxGL.StyleURL.Dark}
+          >
+            {renderAnnotations()}
+          </MapboxGL.MapView>
+        )}
+      </Container>
+    </>
   );
 }
 
