@@ -6,7 +6,6 @@ target 'FieldNoteMobile' do
   #use_frameworks!
 
   rn_path = '../node_modules/react-native'
-    rn_maps_path = '../node_modules/react-native-maps'
 
     # See http://facebook.github.io/react-native/docs/integration-with-existing-apps.html#configuring-cocoapods-dependencies
     pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
@@ -42,10 +41,6 @@ target 'FieldNoteMobile' do
     pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
 
     # react-native-maps dependencies
-    pod 'react-native-maps', path: rn_maps_path
-    pod 'react-native-google-maps', path: rn_maps_path  # Uncomment this line if you want to support GoogleMaps on iOS
-    pod 'GoogleMaps'  # Uncomment this line if you want to support GoogleMaps on iOS
-    pod 'Google-Maps-iOS-Utils' # Uncomment this line if you want to support GoogleMaps on iOS
     pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
 
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
@@ -56,11 +51,6 @@ target 'FieldNoteMobile' do
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
-      if target.name == 'react-native-google-maps'
-        target.build_configurations.each do |config|
-          config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
-        end
-      end
       if target.name == "React"
         target.remove_from_project
       end

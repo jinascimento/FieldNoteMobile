@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput, Keyboard } from 'react-native';
+import { TextInput, Keyboard, Alert } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import getRealm from '../../services/realm';
 import {
@@ -34,7 +34,7 @@ export default function Annotation({ navigation }) {
   async function handleAddAnnotation() {
     Keyboard.dismiss();
     const data = {
-      id: 1,
+      id: 2,
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
       description,
@@ -42,6 +42,7 @@ export default function Annotation({ navigation }) {
 
     try {
       const realm = await getRealm();
+      console.tron.log(realm.path)
       realm.write(() => {
         realm.create('Annotation', data);
       });
