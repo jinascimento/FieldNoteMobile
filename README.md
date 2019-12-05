@@ -83,7 +83,7 @@ Utilizado a ferramenta Realm para banco de dados móvel, devido a sua fácil uti
 
 [Realm](https://realm.io/)
 
-## Configuraçes do ambiente
+## Configurações do ambiente
 
 * React-native version: 0.59.4
 
