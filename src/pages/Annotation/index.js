@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TextInput, Keyboard, Alert } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
+
+import Layout from '../../components/Layout';
 import getRealm from '../../services/realm';
 import {
-  Container,
   Form,
   inputTextArea,
   SubmitButton,
@@ -39,7 +40,7 @@ export default function Annotation({ navigation }) {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
       description,
-      noted_at: notedAt,
+      noted_at: notedAt.toLocaleString(),
     };
     const realm = await getRealm();
     if (description) {
@@ -73,7 +74,7 @@ export default function Annotation({ navigation }) {
   }
 
   return (
-    <Container>
+    <Layout>
       <Title>Inserir Anotação</Title>
 
       <Form>
@@ -83,10 +84,12 @@ export default function Annotation({ navigation }) {
           numberOfLines={2}
           autoCorrect={false}
           autoCapitalize="none"
-          placeholder="Anotação"
+          placeholder="Digite sua anotação"
           returnKeyType="next"
           value={description}
           onChangeText={setDescription}
+          placeholderTextColor="#000000"
+          fontSize={16}
         />
         <ContainerButton>
           <CancelButton onPress={handleCancel}>
@@ -98,7 +101,7 @@ export default function Annotation({ navigation }) {
           </SubmitButton>
         </ContainerButton>
       </Form>
-    </Container>
+    </Layout>
   );
 }
 

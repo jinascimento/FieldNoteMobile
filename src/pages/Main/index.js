@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ActivityIndicator,
-  Modal,
-  Text,
-} from 'react-native';
+import { ActivityIndicator, Modal, Text } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import MapboxGL from '@mapbox/react-native-mapbox-gl';
 import Geolocation from '@react-native-community/geolocation';
@@ -46,7 +42,9 @@ function Main({ isFocused }) {
         title={annotation.description}
       >
         <AnnotationContainer synced={annotation.synced === false}>
-          <AnnotationText onPress={() => triggerModal(true, annotation)}>o</AnnotationText>
+          <AnnotationText onPress={() => triggerModal(true, annotation)}>
+            o
+          </AnnotationText>
         </AnnotationContainer>
       </MapboxGL.PointAnnotation>
     ));
@@ -76,20 +74,15 @@ function Main({ isFocused }) {
 
   return (
     <Container>
-      <Modal
-        visible={displayModal}
-        animationType="slide"
-      >
+      <Modal visible={displayModal} animationType="slide">
         <ContainerModal>
           <Title>Dados da anotação realizada</Title>
-          <ButtonClose
-            title="Fechar"
-            onPress={() => triggerModal(false)} />
+          <ButtonClose title="Fechar" onPress={() => triggerModal(false)} />
           <CardData>
             <TitleField>Descrição:</TitleField>
             <Text>{annotationTargetModal.description}</Text>
             <TitleField>Data e hora:</TitleField>
-            <Text>{console.tron.log(annotationTargetModal)}</Text>
+            <Text>{annotationTargetModal.noted_at}</Text>
           </CardData>
         </ContainerModal>
       </Modal>

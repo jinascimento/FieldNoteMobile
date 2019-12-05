@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux';
 import { signInRequest } from '../../store/modules/auth/actions';
 
 import {
-  Container,
   Form,
   FormInput,
   SubmitButton,
   SubmitButtonText,
+  Title,
 } from './styles';
+import Layout from '../../components/Layout';
 
 export default function Signin() {
   const dispatch = useDispatch();
@@ -21,7 +22,9 @@ export default function Signin() {
   }
 
   return (
-    <Container>
+    <Layout>
+      <Title>Anotações de Campo</Title>
+
       <Form>
         <FormInput
           icon="mail-outline"
@@ -46,6 +49,6 @@ export default function Signin() {
           <SubmitButtonText>Acessar</SubmitButtonText>
         </SubmitButton>
       </Form>
-    </Container>
+    </Layout>
   );
 }

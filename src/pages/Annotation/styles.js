@@ -2,21 +2,12 @@ import styled from 'styled-components/native';
 import { Platform, StyleSheet } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
-export const Container = styled.KeyboardAvoidingView.attrs({
-  enabled: Platform.OS === 'ios',
-  behavior: 'padding',
-})`
-  flex: 1;
-  align-items: center;
-  padding: 0 30px;
-  margin-top: 40px;
-`;
-
 export const Title = styled.Text`
   font-size: 20px;
   color: #000000;
   font-weight: bold;
   align-self: center;
+  font-family: Helvetica;
 `;
 
 export const Form = styled.View`
@@ -41,7 +32,7 @@ export const ContainerButton = styled.View`
 
 export const SubmitButton = styled(RectButton)`
   height: 46px;
-  background: rgba(24, 141, 64, 0.98);
+  background: rgb(254,252,252);
   border-radius: 20px;
   margin-top: 100px;
   margin-bottom: 40px;
@@ -59,9 +50,11 @@ export const CancelButton = styled(RectButton)`
   width: 48%;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
 `;
 
 export const SubmitButtonText = styled.Text`
   font-size: 16px;
-  color: #fff;
+  color: #000000;
+  font-weight: bold;
 `;

@@ -22,10 +22,13 @@ export default (signedIn = false) =>
           {
             tabBarOptions: {
               keyboardHidesTabBar: true,
-              activeTintColor: '#333',
-              inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
+              activeTintColor: '#20ab53',
+              inactiveTintColor: 'rgb(0,0,0)',
+              labelStyle: {
+                fontSize: 14,
+              },
               style: {
-                backgroundColor: '#ccc',
+                backgroundColor: '#ffffff',
               },
             },
           }

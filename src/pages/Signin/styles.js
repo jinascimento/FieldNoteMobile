@@ -2,26 +2,18 @@ import { Platform, } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
-export const Container = styled.KeyboardAvoidingView.attrs({
-  enabled: Platform.OS === 'ios',
-  behavior: 'padding',
-})`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  padding: 0 30px;
-`;
-
 export const Form = styled.View`
   align-self: stretch;
-  margin-top: 50px;
+  margin-top: 300px;
+  justify-content: space-around;
 `;
 
 export const FormInput = styled.TextInput`
   margin-bottom: 30px;
   border: 0;
-  border-bottom-color: #ede8f7;
+  border-bottom-color: #2b2b2b;
   border-bottom-width: 2px;
+  font-size: 16px;
   color: #2f76b4;
   &:focus {
     border-bottom-color: 38aeff;
@@ -30,7 +22,7 @@ export const FormInput = styled.TextInput`
 
 export const SubmitButton = styled(RectButton)`
   height: 46px;
-  background: rgba(24,141,64,0.98);
+  background: rgb(254,252,252);
   border-radius: 20px;
   margin-top: 15px;
   align-items: center;
@@ -38,6 +30,16 @@ export const SubmitButton = styled(RectButton)`
 `;
 
 export const SubmitButtonText = styled.Text`
-  font-size: 16px;
-  color: #fff;
+  font-size: 18px;
+  color: rgba(0,0,0,0.97);
+  font-weight: bold;
+`;
+
+export const Title = styled.Text`
+  font-size: 22px;
+  color: #000000;
+  font-weight: bold;
+  font-family: Helvetica;
+  align-self: center;
+  margin-top: 50px;
 `;

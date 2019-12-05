@@ -7,12 +7,14 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   behavior: 'padding',
 })`
   flex: 1;
+  background-color: rgba(156, 237, 191, 0.9);
   align-items: center;
   padding: 0 30px;
   margin-top: 40px;
 `;
 
 export const Title = styled.Text`
+  font-family: Helvetica;
   font-size: 20px;
   color: #000000;
   font-weight: bold;
@@ -30,14 +32,10 @@ export const ProgressBar = styled.View`
   flex: 1;
 `;
 
-export const ContainerButton = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
 
 export const SubmitButton = styled(RectButton)`
   height: 46px;
-  background: rgba(24, 141, 64, 0.98);
+  background: rgb(254,252,252);
   border-radius: 20px;
   margin-top: 100px;
   margin-bottom: 40px;
@@ -49,5 +47,6 @@ export const SubmitButton = styled(RectButton)`
 
 export const SubmitButtonText = styled.Text`
   font-size: 16px;
-  color: #fff;
+  color: #000000;
+  font-weight: bold;
 `;

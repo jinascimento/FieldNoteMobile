@@ -28,6 +28,7 @@ export const TitleField = styled.Text`
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 export const Title = styled.Text`
@@ -44,6 +45,6 @@ export const ButtonClose = styled.Button`
 
 export const ContainerModal = styled.View`
   flex: 1;
-  background-color: rgba(11, 312, 139, 0.6);
+  background-color: rgba(156, 237, 191, 0.9);
   align-items: center;
 `;

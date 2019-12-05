@@ -4,7 +4,7 @@ export default class AnnotationSchema {
     primaryKey: 'id',
     properties: {
       id: { type: 'int', indexed: true },
-      noted_at: 'date',
+      noted_at: 'string',
       description: 'string',
       longitude: 'float',
       latitude: 'float',

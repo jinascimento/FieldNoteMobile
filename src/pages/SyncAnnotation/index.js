@@ -15,6 +15,7 @@ import {
   ContainerButton,
   Form,
 } from '../Annotation/styles';
+import Layout from '../../components/Layout';
 
 export default function SyncAnnotation({ navigation }) {
   const [annotationsToSync, setAnnotationsToSync] = useState([]);
@@ -57,9 +58,7 @@ export default function SyncAnnotation({ navigation }) {
   }
 
   return (
-    <Container>
-      <Title>Sincronize suas anotações com a base de dados</Title>
-
+    <Layout>
       <Form>
         <ProgressBar>
           <Title>Sincronize suas anotações com a base de dados</Title>
@@ -70,7 +69,7 @@ export default function SyncAnnotation({ navigation }) {
           </SubmitButton>
         </ContainerButton>
       </Form>
-    </Container>
+    </Layout>
   );
 }
 
