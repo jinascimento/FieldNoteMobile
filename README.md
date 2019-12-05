@@ -127,4 +127,23 @@ Utilizado a ferramenta Realm para banco de dados móvel, devido a sua fácil uti
     ### Android
     
     1. Inicie a aplicação com `react-native run-android`
+    
+Telas:
+
+#### Login:
+
+![Alt text](./images/login.png)
+
+### Pagina inicial
+
+![Alt text](./images/home_page.png)
+
+### Sincronização de anotações offline
+
+![Alt text](./images/sync.png)
+
+### Inserção de anotação
+
+![Alt text](./images/annotation.png)
+
 
